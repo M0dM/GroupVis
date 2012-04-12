@@ -1,0 +1,36 @@
+{% extends "ILLVisitBundle::base.html.twig" %}
+{% block title %} Visitors Login{% endblock %}
+{% block body %}
+<div class="row">
+	<div class="span5 offset4">
+		<h1 style="margin-bottom: 10px">Login</h1>
+		{% if error %}
+		    <div class="alert alert-error">
+		    	<p><strong>{{ error }}</strong></p>
+		    </div>
+		{% endif %}
+		<div class="alert alert-info">
+		       <strong>Please enter your visitors credentials to login</strong>
+		</div>
+		<form class="form-inline" action="{{ path("fos_user_security_check") }}" method="post">
+		<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="username">Username</label>
+					<div class="controls">
+		    			<input type="text" id="username" name="_username" class="input-xlarge" value="{{ last_username }}" />
+		    		</div>
+		    	</div>
+				<div class="control-group">
+					<label class="control-label" for="password">Password</label>
+					<div class="controls">
+		    			<input type="password" id="password" name="_password" class="input-xlarge" />
+		    		</div>
+		    	</div>
+		          <div class="form-actions">
+					<button type="submit" id="_submit" name="_submit" class="btn btn-large">Login</button>		          
+				</div>
+		  </fieldset>
+		  <form>
+	</div>
+</div>
+{% endblock body %}

@@ -1,0 +1,6 @@
+api.visits:
+    type:         rest
+    resource:     ILL\VisitAPIBundle\Controller\VisitController
+    prefix:       /api/v1
+    name_prefix:  api_
+

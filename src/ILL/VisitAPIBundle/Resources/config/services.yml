@@ -1,0 +1,8 @@
+services:
+    wsse.security.authentication.provider:
+        class:  ILL\VisitAPIBundle\Security\Authentication\Provider\WsseProvider
+        arguments: ['', %kernel.cache_dir%/security/nonces]
+
+    wsse.security.authentication.listener:
+        class:  ILL\VisitAPIBundle\Security\Firewall\WsseListener
+        arguments: [@security.context, @security.authentication.manager]

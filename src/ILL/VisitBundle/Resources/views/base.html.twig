@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block stylesheets %}
+	    	<link href="{{ asset('http://bootswatch.com/superhero/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+	    	<link href="{{ asset('bundles/illvisit/lib/jquery-ui/css/flick/jquery-ui-1.8.18.custom.css') }}" type="text/css" rel="stylesheet" />
+        {% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('bundles/illvisit/lib/jquery-ui/js/jquery-1.7.1.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('css/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
+			<script src="{{ asset('http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js')}}" type="text/javascript"></script>
+            <script src="https://raw.github.com/janl/mustache.js/master/mustache.js"></script>
+            <script src="{{ asset('bundles/illvisit/js/visits.js')}}" type="text/javascript"></script>
+ 
+        {% endblock %}
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %} GroupVis {% endblock %}</title>
+    </head>
+    <body>
+	 <div class="navbar navbar-fixed-top">
+	      <div class="navbar-inner">
+	        <div class="container-fluid">
+	          <a class="brand" href="{{ path ('ill_visit_visit_all') }}">Visitors</a>
+	          <div class="nav-collapse">
+	          
+	            <ul class="nav">
+	             {% if app.user %}
+	             {% if is_granted('ROLE_ADMIN') %}
+	              <li class="">
+	                <a href="{{ path ('ill_visit_visit_all') }}">Visits</a>
+	              </li>
+	              {% endif %}
+	              <li class="">
+	                <a href="{{ path ('ill_visit_user_visits') }}">My visits</a>
+	              </li>
+	              <li class="">
+	                <a href="{{ path ('ill_visit_visit_create') }}">Create Visit</a>
+	              </li>
+	              {% if is_granted('ROLE_ADMIN') %}
+	              	<li class="">
+	                	<a href="{{ path ('ill_visit_admin_index') }}">Admin</a>
+	              	</li>
+	              {% endif %}
+	              {% endif %}
+	            </ul>
+	            {% if app.user %}
+	            <ul class="nav pull-right">
+	              <li class="">
+	                <a href="{{ path('fos_user_security_logout')}}"">Logout</a>
+	              </li>
+	            </ul>	 
+	            {% endif %}           	
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+		<div class="container-fluid" style="margin-top:100px; margin-bottom: 60px">
+	    	{% block body %}{% endblock %}
+		</div>
+    </body>
+</html>

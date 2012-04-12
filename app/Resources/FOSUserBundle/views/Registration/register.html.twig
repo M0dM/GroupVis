@@ -1,0 +1,87 @@
+{% extends "EUPaNdataBundle::layout.html.twig" %}
+{% block title %} PaNdata Europe - Register {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% stylesheets 
+	'@EUPaNdataBundle/Resources/public/lib/uniform/css/uni-form.css'
+	'@EUPaNdataBundle/Resources/public/lib/uniform/css/default.uni-form.css'
+%}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+{% endstylesheets %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% javascripts 
+	'@EUPaNdataBundle/Resources/public/lib/ui/jquery-1.4.2.min.js'
+	'@EUPaNdataBundle/Resources/public/lib/uniform/js/uni-form.jquery.min.js'
+%}
+	<script src="{{ asset_url }}" type="text/javascript"></script>
+{% endjavascripts %}
+{% endblock %}
+{% block content %}
+<script type="text/javascript">
+	$(document).ready(function() {
+		    	$('#tos-modal').modal();
+
+	});
+</script>
+<div class="modal" id="tos-modal" style="display:none">
+    <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Terms and Conditions</h3>
+    </div>
+    <div class="modal-body">
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque porttitor nisi vel magna sollicitudin rhoncus lacinia risus ullamcorper. Nunc non dolor sit amet ante cursus viverra vel sollicitudin lacus. Praesent et tempor nulla. Quisque sagittis lectus ac quam aliquet quis euismod quam faucibus. Sed volutpat vehicula ligula, non tempus nunc tincidunt sed. Cras lobortis odio quis odio varius bibendum. Curabitur vehicula magna ut arcu volutpat cursus. Mauris dui leo, convallis nec elementum at, volutpat ut velit.</p>
+		<p>Proin iaculis fringilla leo, vitae interdum nisi aliquet ac. Nulla erat quam, vulputate eu condimentum eu, dapibus vel purus. Etiam hendrerit varius libero, in tristique enim mollis ut. Curabitur lacinia erat vitae risus fermentum ut ultricies diam cursus. Phasellus ultrices vulputate lectus pretium hendrerit. Phasellus sit amet felis a neque malesuada venenatis sit amet eu erat. Quisque sollicitudin venenatis ligula, eu porttitor nulla vulputate varius. Nam consectetur, est sed suscipit elementum, enim neque placerat mi, eu consequat est dui eu dolor. Donec luctus pellentesque eros pretium bibendum. Nam semper odio vitae nulla accumsan vel sagittis orci fringilla.</p>
+    </div>
+    <div class="modal-footer">
+    <a href="#" data-dismiss="modal" class="btn">Close</a>
+    </div>
+</div>
+<h1 style="margin-bottom: 10px">Register</h1>
+<div class="alert alert-info">
+        <p><strong>Please fill in the form to register to PaNsoft. Once registered, we will send you a validation email.</a></p>
+</div>
+<div class="row">
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="uniForm">
+  <fieldset class="inlineLabels">
+  	<div class="span8 columns">
+  
+  	<div class="ctrlHolder">
+  	  	<label for="fos_user_registration_form_username">Username</label>
+      	{{ form_widget(form.username, { 'attr': {'class': 'textInput medium'} }) }}
+      	<p class="formHint">Please enter a username.</p>
+  	</div>
+  	<div class="ctrlHolder">
+  	  	<label for="fos_user_registration_form_username">Email</label>
+      	{{ form_widget(form.email, { 'attr': {'class': 'textInput medium'} }) }}
+      	<p class="formHint">Please enter a valid email.</p>
+  	</div>
+  	
+  	<div class="ctrlHolder">
+  	  	<label for="fos_user_registration_form_username">Password</label>
+      	{{ form_widget(form.plainPassword.first, { 'attr': {'class': 'textInput medium'} }) }}
+      	<p class="formHint">Please enter a valid email.</p>
+  	</div>
+  	
+   	<div class="ctrlHolder">
+  	  	<label for="fos_user_registration_form_username">Confirm Password</label>
+      	{{ form_widget(form.plainPassword.second, { 'attr': {'class': 'textInput medium'} }) }}
+      	<p class="formHint">Please confirm your password.</p>
+  	</div> 	
+  	  {{ form_rest(form) }}  
+  	</div>
+  	<div class="span4 columns">
+  
+				<img src="{{ asset('bundles/eupandata/images/pandata-labs-europe-330.png') }}" />
+			
+  	</div>
+    <div class="buttonHolder">
+    	<label for="tos" class="secondaryAction"><input type="checkbox" id="tos" name="tos"/> I agree to the <a href="#tos-modal" data-toggle="modal">terms of service</a></label>
+    	<button type="submit" id="_submit" name="_submit" class="btn-success btn-large">Register</button></div>
+  </fieldset>
+</form>
+</div>
+{% endblock content %}
+

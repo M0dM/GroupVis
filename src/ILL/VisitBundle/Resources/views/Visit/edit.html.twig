@@ -1,0 +1,60 @@
+{% extends 'ILLVisitBundle::base.html.twig' %}
+
+{% block body %}
+	<div class="row-fluid">
+		<div class="span12">
+			<h1 style="margin-bottom: 10px">Create visit</h1>
+			<div class="alert alert-success">
+				Please enter in all of the details
+			</div>
+			<form action="{{ path('ill_visit_visit_edit', {"id" : id}) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+		        {{ form_widget(form._token) }}
+		        <fieldset>
+		          <div class="control-group">
+		            <label class="control-label" for="input01">Name</label>
+		            <div class="controls">
+		             {{ form_widget(form.name, { 'attr': {'class': 'span8'} }) }}
+		              <p class="help-block">Please give us a name for the visit.</p>
+		            </div>
+		          </div>
+		          <div class="control-group">
+		            <label class="control-label" for="textarea">Details</label>
+		            <div class="controls">
+		              {{ form_widget(form.details, { 'attr': {'class': 'span8'} }) }}
+		            </div>
+		          </div>
+		          <div class="control-group">
+		            <label class="control-label" for="input01">Start date</label>
+		            <div class="controls">
+		              {{ form_errors(form) }}
+		              {{ form_widget(form.start_date, { 'attr': {'style': 'width:auto'} }) }}
+		              <p class="help-block">When does thie visit start?</p>
+		            </div>
+		          </div>
+		          <div class="control-group">
+		            <label class="control-label" for="input01">End date</label>
+		            <div class="controls">
+		             {{ form_widget(form.end_date, { 'attr': {'style': 'width:auto'} }) }}
+		              <p class="help-block">When does the visit end?</p>
+		            </div>
+		          </div>
+		          <div class="control-group">
+		            <label class="control-label" for="select01">Responsible</label>
+		            <div class="controls">
+		                {{ form_widget(form.responsible, { 'attr': {'style': 'width:auto'} }) }}
+		            </div>
+		          </div>
+		          <div class="control-group">
+		            <label class="control-label" for="select01">Institute</label>
+		            <div class="controls">
+		                {{ form_widget(form.institute, { 'attr': {'style': 'width:auto'} }) }}
+		            </div>
+		          </div>
+		          <div class="form-actions">
+		            <button type="submit" class="btn btn-primary">Save visit</button>
+		          </div>
+		        </fieldset>
+		      </form>
+		</div>
+	</div>
+{% endblock %}

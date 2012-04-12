@@ -1,0 +1,46 @@
+{% extends 'ILLVisitBundle::base.html.twig' %}
+
+{% block body %}
+	<div class="row-fluid">
+		<div class="span12">
+			<h1 style="margin-bottom: 10px">All visits</h1>
+			<div class="alert alert-info">
+				There are a total of <strong>{{visits|length}}</strong> visits in the system
+			</div>
+			<table class="table table-bordered table-striped">
+			    <thead>
+			      <tr>
+			        <th>Name</th>
+			        <th>Details</th>
+			        <th>Start date</th>
+			        <th>End date</th>
+			        <th>Responsible</th>
+			        <th>Institute</th>
+			        <th></th>
+			      </tr>
+			    </thead>
+                            <tbody>
+                                {% for visit in visits %}
+                                <tr>
+                                        <td>{{ visit.name }}</td>
+                                        <td>{{ visit.details }}</td>
+                                        <td>{{ visit.startDate|date("d/m/Y h:i")}}</td>
+                                        <td>{{ visit.endDate|date("d/m/Y h:i") }}</td>
+                                        <td>{{ visit.responsible }}</td>
+                                        <td>{{ visit.institute }}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                            <a href="{{ path("ill_visit_visit_view", { "id": visit.id } )}}" class="btn btn-info attendees">View</a>
+															{% if is_granted('ROLE_ADMIN') %}
+                                                            <a href="{{ path("ill_visit_visit_edit", { "id": visit.id } )}}" class="btn btn-success">Edit</a>
+                                                            <a href="{{ path("ill_visit_visit_delete", { "id": visit.id } )}}" class="btn btn-danger">Delete</a>
+                                            				{% endif %}
+                                            </div>
+                                        </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+		  	</table>
+		</div>
+	</div>
+{% endblock %}

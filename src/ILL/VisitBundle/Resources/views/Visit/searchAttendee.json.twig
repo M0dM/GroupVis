@@ -1,0 +1,23 @@
+{
+	"attendees":
+	[
+	{% for attendee in attendees %}
+	{% if loop.last %}
+		{
+			"id"		: "{{ attendee.id }}",
+			"fullName"	: "{{ attendee.fullName }}",
+			"birthDate"	: "{{ attendee.birthDate|date("d-m-Y") }}",
+			"url"		: "{{ path("ill_visit_visit_addattendee", { "id" : visitId, "attendeeId" : attendee.id }) }}"
+		}
+	{% else %}
+		{
+			"id"		: "{{ attendee.id }}",
+			"fullName"	: "{{ attendee.fullName }}",
+			"birthDate"	: "{{ attendee.birthDate|date("d-m-Y") }}",
+			"url"		: "{{ path("ill_visit_visit_addattendee", { "id" : visitId, "attendeeId" : attendee.id }) }}"
+		},
+	{% endif %}
+	{% endfor %}
+	]
+
+}

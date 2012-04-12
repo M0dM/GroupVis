@@ -1,0 +1,165 @@
+{% extends 'ILLVisitBundle::base.html.twig' %}
+{% block title %}{{visit.name}}{% endblock %}
+{% block body %}
+	<div class="row-fluid">
+	<h1 style="margin-bottom: 10px">{{ visit.name }}</h1>
+    <ul class="nav nav-pills pull-right">
+	    <li class="active">
+	    	<a href="#"><i class="icon-print icon-white"></i>Print</a>
+	    </li>
+	    <li class="active">
+	    	<a href="#"><i class="icon-edit icon-white"></i>Edit</a>
+	    </li>
+	    <li class="active">
+	    	<a chref="#"><i class="icon-trash icon-white"></i>Delete</a>
+	    </li>
+    </ul>
+    </div>
+	<div class="row-fluid">
+		<div class="span12">
+			<table class="table">
+				<tbody>
+					<tr>
+						<td><b>Start date</b></td>
+						<td>{{ visit.startDate|date('d-m-Y h:i')}}</td>
+						<td><b>End date</b></td>
+						<td>{{ visit.endDate|date('d-m-Y h:i')}}</td>
+					</tr>
+					<tr>
+						<td><b>Details</b></td>
+						<td colspan="3">{{ visit.details}}</td>
+					</tr>
+					<tr>
+						<td><b>Responsible</b></td>
+						<td>{{ visit.responsible}}</td>
+						<td><b>Institute</b></td>
+						<td>{{ visit.institute.printableName}}</td>
+					</tr>
+				</tbody>
+			</table>
+			<h2>Attendees</h2>
+			{% if app.session.hasFlash('attendee_success') %}
+			    <div class="alert alert-success">
+			        {{ app.session.flash('attendee_success') }}
+			    </div>
+			{% endif %}
+			
+			<div id="attendee-success" style="display:none" class="alert alert-success">
+				The attendee has been added
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span7">
+			<table id="attendees" class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>Fullname</th>
+						<th>Date of Birth</th>
+						<th>Place of Birth</th>
+						<th>Nationality</th>
+						<th>Sex</th>
+						<th>Remove attendee</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for attendee in attendees %}
+					<tr>
+						<td>{{attendee.attendee.fullName}}</td>
+						<td>{{attendee.attendee.birthDate|date("d-m-Y")}}</td>
+						<td>{{attendee.attendee.placeOfBirth}}</td>
+						<td>{{attendee.attendee.nationality}}</td>
+						<td>{{attendee.attendee.sex}}</td>
+						<td>
+							<a data-url="{{ path("ill_visit_visit_removeattendee", { "id" : visit.id, "attendeeId" : attendee.attendee.id })}}" class="btn btn-danger attendee-remove"><i class="icon-trash icon-white"></i>Remove</a>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="span5">
+		  <h3>Attendee</h3>
+          <ul id="tab" class="nav nav-tabs">
+            <li class="active"><a href="#create" data-toggle="tab">Create</a></li>
+            <li><a href="#search" data-toggle="tab">Search</a></li>
+          </ul>
+          <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="create">
+				<div class="alert alert-info">
+					Please enter in all of the information
+				</div>
+				<form action="{{path("ill_visit_visit_view", {"id" : visit.id}) }}" method="post"  class="form-vertical" novalidate>
+			        {{ form_widget(form._token) }}
+			        <fieldset>
+			          <div class="control-group">
+			            <label class="control-label" for="input01">First name</label>
+			            <div class="controls">
+						{{ form_errors(form.first_name) }}
+						{{ form_widget(form.first_name) }}
+			            </div>
+			          </div>
+			          <div class="control-group">
+			            <label class="control-label" for="input01">Last name</label>
+			            <div class="controls">
+			             {{ form_errors(form.last_name) }}
+			             {{ form_widget(form.last_name) }}
+			            </div>
+			          </div>
+			          <div class="control-group">
+			            <label class="control-label" for="input01">Place of birth</label>
+			            <div class="controls">
+			            {{ form_errors(form.place_of_birth) }}
+						{{ form_widget(form.place_of_birth) }}
+			            </div>
+			          </div>
+			          <div class="control-group">
+			            <label class="control-label" for="input01">Date of birth</label>
+			            <div class="controls">
+			            {{ form_errors(form.birth_date) }}
+			            {{ form_widget(form.birth_date) }}
+			            </div>
+			          </div>
+			          <div class="control-group">
+			            <label class="control-label" for="input01">Nationality</label>
+			            <div class="controls">
+			             {{ form_errors(form.nationality) }}
+			             {{ form_widget(form.nationality) }}
+			            </div>
+			          </div>
+			          <div class="control-group">
+			            <label class="control-label" for="input01">Sex</label>
+			            <div class="controls">
+			             {{ form_errors(form.sex) }}
+			             {{ form_widget(form.sex) }}
+			            </div>
+			          </div>					          
+			          <div class="form-actions">
+			            <button type="submit" class="btn btn-primary">Save visit</button>
+			          </div>
+			        </fieldset>
+				</form>		            
+			</div>
+            <div class="tab-pane fade in" id="search">
+				<div class="alert">
+					Search for an attendees last name that is already in the system. If not found then create a new attendee.
+				</div>
+			    <form class="form-search">
+			   	 	<input type="text" id="query" class="input-large search-query">
+			    	<button id="search-attendee" data-url="{{ path("ill_visit_visit_searchattendee", { "_format" : "json", "id": visit.id }) }}" class="btn">Search</button>
+			    </form>
+			    <table id="attendees-results" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>Fullname</th>
+							<th>Date of Birth</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+            </div>			
+		</div>
+	</div>
+{% endblock %}

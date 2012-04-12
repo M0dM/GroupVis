@@ -1,0 +1,13 @@
+{
+	"sucess": "true",
+	"message": "The attendee has been added",
+  	"attendee":
+	{
+		"fullName"		: "{{ attendee.fullName }}",
+		"birthDate" 	: "{{ attendee.birthDate|date("d-m-Y") }}",
+		"placeOfBirth"	: "{{ attendee.placeOfBirth }}",
+		"nationality"  	: "{{ attendee.nationality }}",
+		"sex"			: "{{ attendee.sex }}",
+		"url"			: "{{ path("ill_visit_visit_removeattendee", { "id" : visitId, "attendeeId" : attendee.id })}}"
+	}
+}

@@ -3,9 +3,31 @@
 {% block content %}
 		<div class="span10">
 			<h1>Administration</h1>
+			<h2> Existing institutes</h2>
+			<br />
+						{% if app.session.hasFlash('institute_success') %}
+						    <div class="alert alert-success">
+						        {{ app.session.flash('institute_success') }}
+						    </div>
+						{% endif %}
+						<div id="institute-success" style="display:none" class="alert alert-success">
+							The institute has been added
+						</div>
+			<table class="table table-striped">
+				<tr>
+				    <th>Name</th>
+				    <th>Printable name</th>
+			 	</tr>
+			{% for institute in institutes %}
+			    <tr>
+				    <td>{{ institute.name }}</td>
+				    <td>{{ institute.printableName }}</td>
+			 	</tr>
+   			{% endfor %}
+			</table>
 			<h2> Add an institute</h2>
 			<br />
-			<form action="{{ path('ill_visit_visit_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+			<form action="{{ path('ill_visit_admin_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
 		        {{ form_widget(form._token) }}
 		        <fieldset>
 		          <div class="control-group">

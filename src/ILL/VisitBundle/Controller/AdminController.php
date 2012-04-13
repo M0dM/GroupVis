@@ -26,6 +26,8 @@ class AdminController extends Controller
      */
     public function createAction(Request $request)
     {
+    	$repository = $this->getDoctrine()->getRepository('ILLVisitBundle:Institute');
+    	$institutes = $repository->findAll();    	
     	$institute = new Institute();
     	$form = $this->createForm(new InstituteType(),$institute);
     	if ($request->getMethod() == 'POST') 
@@ -36,10 +38,11 @@ class AdminController extends Controller
    				$em = $this->getDoctrine()->getEntityManager();
    				$em->persist($institute);
     			$em->flush();
-			   	return $this->redirect($this->generateUrl('ill_admin_admin_createInstitute'));
+    			$this->get('session')->setFlash('institute_success', 'The institute was added to the repository !');
+			   	return $this->redirect($this->generateUrl('ill_visit_admin_create'));
            }
         }
-        return $this->render("ILLVisitBundle:Admin:createInstitute.html.twig", array("form"=>$form->createView()));
+        return $this->render("ILLVisitBundle:Admin:createInstitute.html.twig", array("form"=>$form->createView(), "institutes"=>$institutes));
     }
     
      /**
@@ -52,4 +55,14 @@ class AdminController extends Controller
     	$institutes = $repository->findAll();
     	return $this->render("ILLVisitBundle:Admin:showInstitutes.html.twig", array("institutes"=>$institutes));
     }
+    
+     /**
+     * @Route("/admin/institute/add/{id}.json", defaults={"_format" = "json"})
+     * @Template()
+     */
+    public function addInstituteAction()
+    {
+        $institute = new Institute();        
+    	return array("institutes"=>$institutes);	    
+   	}
 }

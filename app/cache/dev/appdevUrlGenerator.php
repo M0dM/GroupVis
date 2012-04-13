@@ -36,6 +36,8 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
        'ill_visit_visit_viewuservisits' => true,
        'ill_visit_visit_all' => true,
        'ill_visit_admin_index' => true,
+       'ill_visit_admin_create' => true,
+       'ill_visit_admin_showinstitutes' => true,
        'fos_user_security_login' => true,
        'fos_user_security_check' => true,
        'fos_user_security_logout' => true,
@@ -186,6 +188,16 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
     private function getill_visit_admin_indexRouteInfo()
     {
         return array(array (), array (  '_controller' => 'ILL\\VisitBundle\\Controller\\AdminController::indexAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/admin',  ),));
+    }
+
+    private function getill_visit_admin_createRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'ILL\\VisitBundle\\Controller\\AdminController::createAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/admin/institute/create',  ),));
+    }
+
+    private function getill_visit_admin_showinstitutesRouteInfo()
+    {
+        return array(array (), array (  '_controller' => 'ILL\\VisitBundle\\Controller\\AdminController::showInstitutesAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/admin/institute/show',  ),));
     }
 
     private function getfos_user_security_loginRouteInfo()

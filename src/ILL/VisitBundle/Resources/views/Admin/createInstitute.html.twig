@@ -1,0 +1,31 @@
+{% extends 'ILLVisitBundle::baseAdmin.html.twig' %}
+
+{% block content %}
+		<div class="span10">
+			<h1>Administration</h1>
+			<h2> Add an institute</h2>
+			<br />
+			<form action="{{ path('ill_visit_visit_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+		        {{ form_widget(form._token) }}
+		        <fieldset>
+		          <div class="control-group">
+		            <label class="control-label" for="input01">Name</label>
+		            <div class="controls">
+		           	    {{ form_widget(form.name, { 'attr': {'class': 'span8'} }) }}
+		              <p class="help-block">Please give us a name for the institute.</p>
+		            </div>
+		          </div>
+		          <div class="control-group">
+		            <label class="control-label" for="input01">Printable name</label>
+		            <div class="controls">
+		           	    {{ form_widget(form.printable_name, { 'attr': {'class': 'span8'} }) }}
+		            </div>
+		          </div>
+		          <div class="form-actions">
+		            <button type="submit" class="btn btn-primary">Save institute</button>
+		          </div>
+		        </fieldset>
+		      </form>
+		</div>
+	</div>
+{% endblock %}

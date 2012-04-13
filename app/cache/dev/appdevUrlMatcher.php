@@ -165,6 +165,16 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'ILL\\VisitBundle\\Controller\\AdminController::indexAction',  '_route' => 'ill_visit_admin_index',);
         }
 
+        // ill_visit_admin_create
+        if ($pathinfo === '/admin/institute/create') {
+            return array (  '_controller' => 'ILL\\VisitBundle\\Controller\\AdminController::createAction',  '_route' => 'ill_visit_admin_create',);
+        }
+
+        // ill_visit_admin_showinstitutes
+        if ($pathinfo === '/admin/institute/show') {
+            return array (  '_controller' => 'ILL\\VisitBundle\\Controller\\AdminController::showInstitutesAction',  '_route' => 'ill_visit_admin_showinstitutes',);
+        }
+
         // fos_user_security_login
         if ($pathinfo === '/login') {
             return array (  '_controller' => 'FOS\\UserBundle\\Controller\\SecurityController::loginAction',  '_route' => 'fos_user_security_login',);

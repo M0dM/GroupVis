@@ -1,0 +1,23 @@
+{% extends 'ILLVisitBundle::baseAdmin.html.twig' %}
+
+{% block content %}
+	<div class="row">
+		<div class="span10">
+			<h1>Administration</h1>
+			<h2> List of the institutes</h2>
+			<br />
+			<table class="table table-striped">
+				<tr>
+				    <th>Name</th>
+				    <th>Printable name</th>
+			 	</tr>
+			{% for institute in institutes %}
+			    <tr>
+				    <td>{{ institute.name }}</td>
+				    <td>{{ institute.printableName }}</td>
+			 	</tr>
+   			{% endfor %}
+			</table>
+		</div>
+	</div>
+{% endblock %}

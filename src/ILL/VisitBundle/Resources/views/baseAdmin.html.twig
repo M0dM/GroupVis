@@ -1,0 +1,17 @@
+{% extends 'ILLVisitBundle::base.html.twig' %}
+	{% block body %}
+	<div class="row">
+		<div class="span2">
+		    <ul class="nav nav-list">
+		    	<li class="nav-header">Institutes</li>
+		   		<li>
+		    		<a href="{{ path ('ill_visit_admin_showinstitutes') }}">Institutes</a>
+		    	</li>
+		   	 	<li>
+		    		<a href="{{ path ('ill_visit_admin_create') }}">Add institute</a>
+		    	</li>
+		    </ul>
+		</div>
+	{% block content %}{% endblock %}
+	</div>
+	{% endblock %}

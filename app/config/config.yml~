@@ -73,7 +73,7 @@ fos_rest:
             xml: true
             json: true
         templating_formats:
-            html: false
+            html: true
             json: false
         force_redirects:
             html: true
@@ -102,21 +102,12 @@ services:
         arguments:
             - [@serializer.method]
             - {json: @serializer.encoder.json }
-    wsse.security.authentication.provider:
-        class:  ILL\VisitAPIBundle\Security\Authentication\Provider\WsseProvider
-        arguments: ['', %kernel.cache_dir%/security/nonces]
-    wsse.security.authentication.listener:
-        class:  ILL\VisitAPIBundle\Security\Firewall\WsseListener
-        arguments: [@security.context, @security.authentication.manager]
-    security.authentication.factory.wsse:
-        class:  ILL\VisitAPIBundle\DependencyInjection\Security\Factory\WsseFactory
-        tags:
-            - { name: security.listener.factory }
-    twig.extension.txt:
-        class: Twig_Extensions_Extension_Text
-        tags:
-            - { name: twig.extension }
-    twig.extension.debug:
-        class: Twig_Extensions_Extension_Debug
-        tags:
-            - { name: twig.extension }
+services:
+   twig.extension.txt:
+      class: Twig_Extensions_Extension_Text
+      tags:
+         - { name: twig.extension }
+   twig.extension.debug:
+      class: Twig_Extensions_Extension_Debug
+      tags:
+         - { name: twig.extension }

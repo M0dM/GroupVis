@@ -46,24 +46,27 @@ class __TwigTemplate_8752f8d2c0155cbd81119c900e0b3819 extends Twig_Template
         echo "\t\t\t\t\t\t<div id=\"institute-success\" style=\"display:none\" class=\"alert alert-success\">
 \t\t\t\t\t\t\tThe institute has been added
 \t\t\t\t\t\t</div>
-\t\t\t<table class=\"table table-striped\">
+\t\t\t<table id=\"institutes\" class=\"table table-striped\">
+\t\t\t\t<thead>
 \t\t\t\t<tr>
 \t\t\t\t    <th>Name</th>
 \t\t\t\t    <th>Printable name</th>
 \t\t\t \t</tr>
+\t\t\t \t</thead>
+\t\t\t \t<tbody>
 \t\t\t";
-        // line 21
+        // line 24
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getContext($context, "institutes"));
         foreach ($context['_seq'] as $context["_key"] => $context["institute"]) {
-            // line 22
+            // line 25
             echo "\t\t\t    <tr>
 \t\t\t\t    <td>";
-            // line 23
+            // line 26
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "institute"), "name"), "html", null, true);
             echo "</td>
 \t\t\t\t    <td>";
-            // line 24
+            // line 27
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "institute"), "printableName"), "html", null, true);
             echo "</td>
 \t\t\t \t</tr>
@@ -72,18 +75,19 @@ class __TwigTemplate_8752f8d2c0155cbd81119c900e0b3819 extends Twig_Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['institute'], $context['_parent'], $context['loop']);
         $context = array_merge($_parent, array_intersect_key($context, $_parent));
-        // line 27
-        echo "\t\t\t</table>
+        // line 30
+        echo "   \t\t\t\t</tbody>
+\t\t\t</table>
 \t\t\t<h2> Add an institute</h2>
 \t\t\t<br />
 \t\t\t<form action=\"";
-        // line 30
+        // line 34
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("ill_visit_admin_create"), "html", null, true);
-        echo "\" method=\"post\" ";
+        echo "\" id=\"form-institute\" method=\"post\" ";
         echo $this->env->getExtension('form')->renderEnctype($this->getContext($context, "form"));
         echo " class=\"form-horizontal\" novalidate>
 \t\t        ";
-        // line 31
+        // line 35
         echo $this->env->getExtension('form')->renderWidget($this->getAttribute($this->getContext($context, "form"), "_token"));
         echo "
 \t\t        <fieldset>
@@ -91,7 +95,7 @@ class __TwigTemplate_8752f8d2c0155cbd81119c900e0b3819 extends Twig_Template
 \t\t            <label class=\"control-label\" for=\"input01\">Name</label>
 \t\t            <div class=\"controls\">
 \t\t           \t    ";
-        // line 36
+        // line 40
         echo $this->env->getExtension('form')->renderWidget($this->getAttribute($this->getContext($context, "form"), "name"), array("attr" => array("class" => "span8")));
         echo "
 \t\t              <p class=\"help-block\">Please give us a name for the institute.</p>
@@ -101,13 +105,16 @@ class __TwigTemplate_8752f8d2c0155cbd81119c900e0b3819 extends Twig_Template
 \t\t            <label class=\"control-label\" for=\"input01\">Printable name</label>
 \t\t            <div class=\"controls\">
 \t\t           \t    ";
-        // line 43
+        // line 47
         echo $this->env->getExtension('form')->renderWidget($this->getAttribute($this->getContext($context, "form"), "printable_name"), array("attr" => array("class" => "span8")));
         echo "
 \t\t            </div>
 \t\t          </div>
 \t\t          <div class=\"form-actions\">
-\t\t            <button type=\"submit\" class=\"btn btn-primary\">Save institute</button>
+\t\t            <button id=\"save-institute\" data-url=\"";
+        // line 51
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("ill_visit_admin_addinstitute", array("_format" => "json")), "html", null, true);
+        echo "\" type=\"submit\" class=\"btn\">Submit</button>
 \t\t          </div>
 \t\t        </fieldset>
 \t\t      </form>

@@ -203,7 +203,7 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
 
     private function getill_visit_admin_addinstituteRouteInfo()
     {
-        return array(array (  0 => 'id',), array (  '_format' => 'json',  '_controller' => 'ILL\\VisitBundle\\Controller\\AdminController::addInstituteAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '.json',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/\\.]+?',    3 => 'id',  ),  2 =>   array (    0 => 'text',    1 => '/admin/institute/add',  ),));
+        return array(array (), array (  '_format' => 'json',  '_controller' => 'ILL\\VisitBundle\\Controller\\AdminController::addInstituteAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/admin/institute/add.json',  ),));
     }
 
     private function getfos_user_security_loginRouteInfo()

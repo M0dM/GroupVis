@@ -176,8 +176,8 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
 
         // ill_visit_admin_addinstitute
-        if (0 === strpos($pathinfo, '/admin/institute/add') && preg_match('#^/admin/institute/add/(?P<id>[^/\\.]+?)\\.json$#xs', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_format' => 'json',  '_controller' => 'ILL\\VisitBundle\\Controller\\AdminController::addInstituteAction',)), array('_route' => 'ill_visit_admin_addinstitute'));
+        if ($pathinfo === '/admin/institute/add.json') {
+            return array (  '_format' => 'json',  '_controller' => 'ILL\\VisitBundle\\Controller\\AdminController::addInstituteAction',  '_route' => 'ill_visit_admin_addinstitute',);
         }
 
         // fos_user_security_login

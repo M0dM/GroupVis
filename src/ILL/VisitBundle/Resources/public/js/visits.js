@@ -63,4 +63,27 @@ $(function(){
 			  }
 			});
 	});
+	$('button[id="save-institute"]').live("click", function(e)
+	{		
+		e.preventDefault();
+		$.ajax({
+			  url: $(this).attr("data-url"),
+			  data: $("form[id='form-institute']").serialize(),
+			  dataType: 'json',
+			  type: 'POST',
+			  cache: false,
+			  success: function(data)
+			  {
+				    var template =
+		    		"<tr>" +
+		    		"	<td>{{institute.name}}</td>" +
+		    		"	<td>{{institute.printableName}}</td>" 
+		    		"</tr>";
+				    var html = Mustache.render(template, data);
+    				$('div[id="institute-success"]').html(data.message);
+				    $('div[id="institute-success"]').slideDown().delay(5000).slideUp('slow');
+				    $('#institutes tbody').append(html);
+			  }
+			});
+	});
 });

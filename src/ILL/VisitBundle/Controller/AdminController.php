@@ -30,18 +30,6 @@ class AdminController extends Controller
     	$institutes = $repository->findAll();    	
     	$institute = new Institute();
     	$form = $this->createForm(new InstituteType(),$institute);
-    	if ($request->getMethod() == 'POST') 
-        {
-           $form->bindRequest($request);
-           if ($form->isValid())
-           {
-   				$em = $this->getDoctrine()->getEntityManager();
-   				$em->persist($institute);
-    			$em->flush();
-    			$this->get('session')->setFlash('institute_success', 'The institute was added to the repository !');
-			   	return $this->redirect($this->generateUrl('ill_visit_admin_create'));
-           }
-        }
         return $this->render("ILLVisitBundle:Admin:createInstitute.html.twig", array("form"=>$form->createView(), "institutes"=>$institutes));
     }
     
@@ -57,12 +45,26 @@ class AdminController extends Controller
     }
     
      /**
-     * @Route("/admin/institute/add/{id}.json", defaults={"_format" = "json"})
-     * @Template()
+     * @Route("/admin/institute/add.json", defaults={"_format" = "json"})
+     * @Template("ILLVisitBundle:Admin:addInstitute.json.twig")
      */
-    public function addInstituteAction()
+    public function addInstituteAction(Request $request)
     {
-        $institute = new Institute();        
-    	return array("institutes"=>$institutes);	    
+    	$institute = new Institute();
+    	$form = $this->createForm(new InstituteType(),$institute);
+    	if ($request->getMethod() == 'POST') 
+        {
+           $form->bindRequest($request);
+           if ($form->isValid())
+           {
+   				$em = $this->getDoctrine()->getEntityManager();
+   				$em->persist($institute);
+    			$em->flush();
+    			$this->get('session')->setFlash('institute_success', 'The institute was added to the repository !');
+           }
+        }
+        
+        $repository = $this->getDoctrine()->getRepository('ILLVisitBundle:Institute');
+    	return array("institute"=>$institute);	    
    	}
 }

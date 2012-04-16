@@ -26,8 +26,6 @@ class Attendee
     }
     /**
      * @var integer $id
-     * @Assert\NotBlank()
-     * @Assert\Type("\Integer")
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -53,7 +51,7 @@ class Attendee
     /**
      * @var datetime $birth_date
      * @Assert\NotBlank()
-     * @Assert\Type("\DateTime")
+     * @Assert\Type("DateTime")
      * @ORM\Column(name="birth_date", type="datetime")
      */
     private $birth_date;

@@ -106,10 +106,10 @@ class VisitController extends Controller
    			if ($form->isValid())
    			{
     			$attendees = new Attendees();
-    			$em->persist($attendee);
     			$attendees->setAttendee($attendee);
     			$attendees->setVisit($visit);
-				$em = $this->getDoctrine()->getEntityManager(); 		
+				$em = $this->getDoctrine()->getEntityManager(); 
+				$em->persist($attendee);		
     			$em->persist($attendees);
     			$em->flush();
     			$this->get('session')->setFlash('attendee_success', 'The attendee was added to the visit!');

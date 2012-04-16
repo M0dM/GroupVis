@@ -106,10 +106,10 @@ class VisitController extends Controller
    			if ($form->isValid())
    			{
     			$attendees = new Attendees();
+    			$em->persist($attendee);
     			$attendees->setAttendee($attendee);
     			$attendees->setVisit($visit);
-				$em = $this->getDoctrine()->getEntityManager();   		
-    			$em->persist($attendee);
+				$em = $this->getDoctrine()->getEntityManager(); 		
     			$em->persist($attendees);
     			$em->flush();
     			$this->get('session')->setFlash('attendee_success', 'The attendee was added to the visit!');
@@ -132,7 +132,7 @@ class VisitController extends Controller
     
     /**
      * @Route("/visit/{id}/attendee/add/{attendeeId}.json", defaults={"_format" = "json"})
-     * @Template()
+     * @Template("ILLVisitBundle:Visit:addAttendee.json.twig")
      */
     public function addAttendeeAction($id, $attendeeId)
     {
@@ -150,7 +150,7 @@ class VisitController extends Controller
    	
     /**
      * @Route("/visit/{id}/attendee/remove/{attendeeId}.json", defaults={"_format" = "json"})
-     * @Template()
+     * @Template("ILLVisitBundle:Visit:removeAttendee.json.twig")
      */
     public function removeAttendeeAction	($id, $attendeeId)
     {
@@ -174,13 +174,13 @@ class VisitController extends Controller
    	
      /**
      * @Route("/")
-     * @Template()
+     * @Template("ILLVisitBundle:Visit:all.html.twig")
      */   
     public function allAction()
     {
     	$repository = $this->getDoctrine()->getRepository('ILLVisitBundle:Visit');
     	$visits = $repository->findAll();
-    	return $this->render("ILLVisitBundle:Visit:all.html.twig", array("visits"=>$visits));
+    	return array("visits"=>$visits);
     	
     }
 }

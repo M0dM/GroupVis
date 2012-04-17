@@ -227,4 +227,24 @@ class Visit
     {
         return $this->attendees;
     }
+    
+    public function getString()
+    {
+    	$stringVisit = "id : " 
+    				 . $this->getId() . "\n"
+    				 . "name : " 
+    				 . $this->getName() . "\n"
+    				 . "start date : "
+    				 . $this->getStartDate()->format('Y-m-d H:i:s') . "\n"
+    				 . "end date : "
+    				 . $this->getEndDate()->format('Y-m-d H:i:s') . "\n"
+    				 . "details : "
+    				 . $this->getDetails() . "\n" 
+    				 . "responsible Id : "
+    				 . $this->getResponsible()->getId() . "\n"
+    				 . "institute Id : "
+    				 . $this->getInstitute()->getId();
+    
+    	return $stringVisit;
+    }
 }
